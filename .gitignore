@@ -15,5 +15,9 @@ Thumbs.db
 # Node modules (if you add npm packages later)
 node_modules/
 
+# Local copies of earlier versions (git history keeps them)
+.backup/
 
+# Local Claude Code tooling
+.claude/
 

@@ -1,394 +1,558 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayasankar R | Software &amp; Embedded Systems Engineer</title>
     <meta name="description" content="Portfolio of Jayasankar R, a software engineer building full-stack, cloud-native, and embedded systems.">
-    <title>Jayasankar R | Software & Embedded Systems Engineer</title>
+    <meta name="theme-color" content="#0C1112" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#EEF2F1" media="(prefers-color-scheme: light)">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jayasankar R | Software &amp; Embedded Systems Engineer">
+    <meta property="og:description" content="Full-stack, cloud-native, and embedded systems work, from the interface down to the hardware pins.">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var stored = null;
+            try { stored = localStorage.getItem("theme"); } catch (error) {}
+            var prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+            root.dataset.theme = stored === "light" || stored === "dark" ? stored : (prefersLight ? "light" : "dark");
+            root.classList.add("js");
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260602icon">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20261028b">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script type="module" src="script.js?v=20261028b"></script>
 </head>
 <body>
-    <canvas id="signal-canvas" aria-hidden="true"></canvas>
-    <div class="page-shell">
-        <header class="site-header" data-reveal>
-            <a class="brand" href="#home" aria-label="Jayasankar R home">
-                <span class="brand-mark">JR</span>
-                <span class="brand-copy">Jayasankar R</span>
-            </a>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="progress" aria-hidden="true"></div>
 
-            <nav class="site-nav" aria-label="Primary navigation">
-                <a href="#work">Work</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </header>
+    <!-- Phosphor Light icons (official paths from @phosphor-icons/core 2.1.1) -->
+    <svg class="sprite" aria-hidden="true" focusable="false">
+        <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M198,64V168a6,6,0,0,1-12,0V78.48L68.24,196.24a6,6,0,0,1-8.48-8.48L177.52,70H88a6,6,0,0,1,0-12H192A6,6,0,0,1,198,64Z"/></symbol>
+        <symbol id="i-download" viewBox="0 0 256 256"><path d="M222,144v64a6,6,0,0,1-6,6H40a6,6,0,0,1-6-6V144a6,6,0,0,1,12,0v58H210V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V32a6,6,0,0,0-12,0v97.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"/></symbol>
+        <symbol id="i-theme" viewBox="0 0 256 256"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm6,12.2a89.86,89.86,0,0,1,20,3.63V214.17a89.86,89.86,0,0,1-20,3.63Zm32,8.23a90.48,90.48,0,0,1,20,12.81V196.76a90.48,90.48,0,0,1-20,12.81ZM38,128a90.12,90.12,0,0,1,84-89.8V217.8A90.12,90.12,0,0,1,38,128Zm160,56.5V71.5a89.81,89.81,0,0,1,0,113Z"/></symbol>
+        <symbol id="i-github" viewBox="0 0 256 256"><path d="M206.13,75.92A57.79,57.79,0,0,0,201.2,29a6,6,0,0,0-5.2-3,57.77,57.77,0,0,0-47,24H123A57.77,57.77,0,0,0,76,26a6,6,0,0,0-5.2,3,57.79,57.79,0,0,0-4.93,46.92A55.88,55.88,0,0,0,58,104v8a54.06,54.06,0,0,0,50.45,53.87A37.85,37.85,0,0,0,98,192v10H72a26,26,0,0,1-26-26A38,38,0,0,0,8,138a6,6,0,0,0,0,12,26,26,0,0,1,26,26,38,38,0,0,0,38,38H98v18a6,6,0,0,0,12,0V192a26,26,0,0,1,52,0v40a6,6,0,0,0,12,0V192a37.85,37.85,0,0,0-10.45-26.13A54.06,54.06,0,0,0,214,112v-8A55.88,55.88,0,0,0,206.13,75.92ZM202,112a42,42,0,0,1-42,42H112a42,42,0,0,1-42-42v-8a43.86,43.86,0,0,1,7.3-23.69,6,6,0,0,0,.81-5.76,45.85,45.85,0,0,1,1.43-36.42,45.85,45.85,0,0,1,35.23,21.1A6,6,0,0,0,119.83,62h32.34a6,6,0,0,0,5.06-2.76,45.83,45.83,0,0,1,35.23-21.11,45.85,45.85,0,0,1,1.43,36.42,6,6,0,0,0,.79,5.74A43.78,43.78,0,0,1,202,104Z"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 256 256"><path d="M216,26H40A14,14,0,0,0,26,40V216a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V40A14,14,0,0,0,216,26Zm2,190a2,2,0,0,1-2,2H40a2,2,0,0,1-2-2V40a2,2,0,0,1,2-2H216a2,2,0,0,1,2,2ZM94,112v64a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm88,28v36a6,6,0,0,1-12,0V140a22,22,0,0,0-44,0v36a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0v2.11A34,34,0,0,1,182,140ZM98,84A10,10,0,1,1,88,74,10,10,0,0,1,98,84Z"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 256 256"><path d="M224,50H32a6,6,0,0,0-6,6V192a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V56A6,6,0,0,0,224,50ZM208.58,62,128,135.86,47.42,62ZM216,194H40a2,2,0,0,1-2-2V69.64l86,78.78a6,6,0,0,0,8.1,0L218,69.64V192A2,2,0,0,1,216,194Z"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 256 256"><path d="M221.59,160.3l-47.24-21.17a14,14,0,0,0-13.28,1.22,4.81,4.81,0,0,0-.56.42l-24.69,21a1.88,1.88,0,0,1-1.68.06c-15.87-7.66-32.31-24-40-39.65a1.91,1.91,0,0,1,0-1.68l21.07-25a6.13,6.13,0,0,0,.42-.58,14,14,0,0,0,1.12-13.27L95.73,34.49a14,14,0,0,0-14.56-8.38A54.24,54.24,0,0,0,34,80c0,78.3,63.7,142,142,142a54.25,54.25,0,0,0,53.89-47.17A14,14,0,0,0,221.59,160.3ZM176,210C104.32,210,46,151.68,46,80A42.23,42.23,0,0,1,82.67,38h.23a2,2,0,0,1,1.84,1.31l21.1,47.11a2,2,0,0,1,0,1.67L84.73,113.15a4.73,4.73,0,0,0-.43.57,14,14,0,0,0-.91,13.73c8.87,18.16,27.17,36.32,45.53,45.19a14,14,0,0,0,13.77-1c.19-.13.38-.27.56-.42l24.68-21a1.92,1.92,0,0,1,1.6-.1l47.25,21.17a2,2,0,0,1,1.21,2A42.24,42.24,0,0,1,176,210Z"/></symbol>
+        <symbol id="i-retry" viewBox="0 0 256 256"><path d="M238,56v48a6,6,0,0,1-6,6H184a6,6,0,0,1,0-12h32.55l-30.38-27.8c-.06-.06-.12-.13-.19-.19a82,82,0,1,0-1.7,117.65,6,6,0,0,1,8.24,8.73A93.46,93.46,0,0,1,128,222h-1.28A94,94,0,1,1,194.37,61.4L226,90.35V56a6,6,0,1,1,12,0Z"/></symbol>
+        <symbol id="i-star" viewBox="0 0 256 256"><path d="M237.28,97.87A14.18,14.18,0,0,0,224.76,88l-60.25-4.87-23.22-56.2a14.37,14.37,0,0,0-26.58,0L91.49,83.11,31.24,88a14.18,14.18,0,0,0-12.52,9.89A14.43,14.43,0,0,0,23,113.32L69,152.93l-14,59.25a14.4,14.4,0,0,0,5.59,15,14.1,14.1,0,0,0,15.91.6L128,196.12l51.58,31.71a14.1,14.1,0,0,0,15.91-.6,14.4,14.4,0,0,0,5.59-15l-14-59.25L233,113.32A14.43,14.43,0,0,0,237.28,97.87Zm-12.14,6.37-48.69,42a6,6,0,0,0-1.92,5.92l14.88,62.79a2.35,2.35,0,0,1-.95,2.57,2.24,2.24,0,0,1-2.6.1L131.14,184a6,6,0,0,0-6.28,0L70.14,217.61a2.24,2.24,0,0,1-2.6-.1,2.35,2.35,0,0,1-1-2.57l14.88-62.79a6,6,0,0,0-1.92-5.92l-48.69-42a2.37,2.37,0,0,1-.73-2.65,2.28,2.28,0,0,1,2.07-1.65l63.92-5.16a6,6,0,0,0,5.06-3.69l24.63-59.6a2.35,2.35,0,0,1,4.38,0l24.63,59.6a6,6,0,0,0,5.06,3.69l63.92,5.16a2.28,2.28,0,0,1,2.07,1.65A2.37,2.37,0,0,1,225.14,104.24Z"/></symbol>
+        <symbol id="i-arrow-up" viewBox="0 0 256 256"><path d="M204.24,116.24a6,6,0,0,1-8.48,0L134,54.49V216a6,6,0,0,1-12,0V54.49L60.24,116.24a6,6,0,0,1-8.48-8.48l72-72a6,6,0,0,1,8.48,0l72,72A6,6,0,0,1,204.24,116.24Z"/></symbol>
+    </svg>
 
-        <main>
-            <section class="hero section" id="home">
-                <div class="hero-copy" data-reveal>
-                    <p class="eyebrow">Full-stack + embedded systems engineer</p>
-                    <h1>Building scalable software with hardware-aware engineering discipline.</h1>
-                    <p class="hero-lede">
-                        I am Jayasankar R, a software engineer with 2+ years of experience across Java,
-                        TypeScript, React, cloud-native delivery, and embedded systems fundamentals.
-                    </p>
-                    <div class="hero-actions" aria-label="Resume and contact actions">
-                        <a class="button primary" href="assets/resumes/Jayasankar_R_Software_Resume.pdf" download>
-                            <span aria-hidden="true">&#8595;</span>
-                            Software Resume
-                        </a>
-                        <a class="button secondary" href="assets/resumes/Jayasankar_R_Embedded_Resume.pdf" download>
-                            <span aria-hidden="true">&#8595;</span>
-                            Embedded Resume
-                        </a>
-                        <a class="button ghost" href="mailto:jayasankarr.mec@gmail.com">
-                            <span aria-hidden="true">&#8599;</span>
-                            Email Me
-                        </a>
-                    </div>
-                </div>
+    <header class="site-header" data-header>
+        <a class="brand" href="#home" aria-label="Jayasankar R, back to top">
+            <span class="brand-mark" aria-hidden="true">JR</span>
+            <span class="brand-name">Jayasankar R</span>
+        </a>
 
-                <div class="hero-visual" data-reveal>
-                    <div class="system-board" aria-label="Engineering focus map">
-                        <div class="board-header">
-                            <span class="status-dot"></span>
-                            <span>Systems online</span>
-                        </div>
-                        <div class="signal-map">
-                            <div class="signal-node node-a">
-                                <span>API</span>
-                                <strong>30%</strong>
-                                <small>latency cut</small>
-                            </div>
-                            <div class="signal-node node-b">
-                                <span>CI/CD</span>
-                                <strong>60%</strong>
-                                <small>faster deploys</small>
-                            </div>
-                            <div class="signal-node node-c">
-                                <span>DB</span>
-                                <strong>100k+</strong>
-                                <small>record schemas</small>
-                            </div>
-                            <div class="signal-node node-d">
-                                <span>MCU</span>
-                                <strong>UART</strong>
-                                <small>bootloader work</small>
-                            </div>
-                        </div>
-                        <div class="board-footer">
-                            <span>Java</span>
-                            <span>TypeScript</span>
-                            <span>React</span>
-                            <span>Kubernetes</span>
-                            <span>Embedded C</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <nav class="nav-island" aria-label="Primary">
+            <a href="#work" data-nav-link>Work</a>
+            <a href="#skills" data-nav-link>Skills</a>
+            <a href="#projects" data-nav-link>Projects</a>
+            <a href="#contact" data-nav-link>Contact</a>
+            <span class="nav-indicator" aria-hidden="true"></span>
+        </nav>
 
-            <section class="section intro-band" id="profile" data-reveal>
-                <p>
-                    I like working where product problems meet system design: backend APIs, ERP workflows,
-                    observability, deployment automation, and low-level embedded concepts like GPIO, UART, ADC,
-                    PWM, flash memory, and bootloaders.
-                </p>
-            </section>
+        <div class="header-actions">
+            <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to light theme">
+                <svg class="icon" aria-hidden="true"><use href="#i-theme"></use></svg>
+            </button>
+            <button class="icon-button menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+        </div>
+    </header>
 
-            <section class="section metrics" aria-label="Portfolio highlights" data-reveal>
-                <div class="metric">
-                    <strong>2+ yrs</strong>
-                    <span>Software engineering experience</span>
-                </div>
-                <div class="metric">
-                    <strong>15+</strong>
-                    <span>Features shipped in Agile teams</span>
-                </div>
-                <div class="metric">
-                    <strong>150-200ms</strong>
-                    <span>PostgreSQL response-time improvement</span>
-                </div>
-                <div class="metric">
-                    <strong>Near-zero</strong>
-                    <span>Manual deployment intervention</span>
-                </div>
-            </section>
-
-            <section class="section split-section" id="work">
-                <div class="section-heading" data-reveal>
-                    <p class="eyebrow">Experience</p>
-                    <h2>Recent engineering work</h2>
-                </div>
-
-                <div class="timeline">
-                    <article class="timeline-item" data-reveal>
-                        <div class="timeline-date">Aug 2025 - Feb 2026</div>
-                        <div class="timeline-content">
-                            <h3>Full-Stack Engineer, Onfuturesites</h3>
-                            <p>
-                                Built scalable backend APIs with Node.js and Fastify, shipped user-facing features
-                                with Next.js and React Native, and designed PostgreSQL schemas for large datasets.
-                            </p>
-                            <ul>
-                                <li>Reduced API latency by 30 percent through query and service-level optimization.</li>
-                                <li>Improved data consistency across schemas handling 100k+ records.</li>
-                            </ul>
-                            <div class="tag-row">
-                                <span>Node.js</span>
-                                <span>Fastify</span>
-                                <span>Next.js</span>
-                                <span>PostgreSQL</span>
-                                <span>Prisma</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="timeline-item" data-reveal>
-                        <div class="timeline-date">Jun 2025 - Oct 2025</div>
-                        <div class="timeline-content">
-                            <h3>DevOps Engineer, Freelance</h3>
-                            <p>
-                                Built CI/CD delivery workflows using GitHub Actions, ArgoCD, Kubernetes, and AWS EKS,
-                                with monitoring coverage across Prometheus, Grafana, Loki, and Fluent Bit.
-                            </p>
-                            <ul>
-                                <li>Reduced deployment time by 60 percent with automated pipelines.</li>
-                                <li>Improved system reliability with alerting and deployment visibility.</li>
-                            </ul>
-                            <div class="tag-row">
-                                <span>ArgoCD</span>
-                                <span>EKS</span>
-                                <span>Docker</span>
-                                <span>Helm</span>
-                                <span>Grafana</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="timeline-item" data-reveal>
-                        <div class="timeline-date">Aug 2023 - Apr 2025</div>
-                        <div class="timeline-content">
-                            <h3>Full-Stack Engineer, Captain Fresh</h3>
-                            <p>
-                                Engineered backend services and REST APIs for ERP stock-transfer workflows, enterprise
-                                integrations, and high-frequency operational transactions.
-                            </p>
-                            <ul>
-                                <li>Improved operational throughput by 15 percent for stock-transfer workflows.</li>
-                                <li>Built Spring Boot microservices and Kafka-backed asynchronous integrations.</li>
-                            </ul>
-                            <div class="tag-row">
-                                <span>TypeScript</span>
-                                <span>React</span>
-                                <span>Spring Boot</span>
-                                <span>PostgreSQL</span>
-                                <span>AWS</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="section skill-section" id="skills">
-                <div class="section-heading" data-reveal>
-                    <p class="eyebrow">Capabilities</p>
-                    <h2>Two tracks, one engineering base</h2>
-                </div>
-
-                <div class="skill-grid">
-                    <article class="skill-card software-card" data-reveal>
-                        <div class="card-kicker">Software systems</div>
-                        <h3>Full-stack and cloud-native delivery</h3>
-                        <p>
-                            Backend APIs, web apps, databases, enterprise integrations, CI/CD, containers, and
-                            production monitoring.
-                        </p>
-                        <div class="chip-cloud">
-                            <span>Java</span>
-                            <span>TypeScript</span>
-                            <span>Node.js</span>
-                            <span>Fastify</span>
-                            <span>Spring Boot</span>
-                            <span>React</span>
-                            <span>Next.js</span>
-                            <span>PostgreSQL</span>
-                            <span>MongoDB</span>
-                            <span>AWS</span>
-                            <span>Docker</span>
-                            <span>Kubernetes</span>
-                        </div>
-                    </article>
-
-                    <article class="skill-card embedded-card" data-reveal>
-                        <div class="card-kicker">Embedded systems</div>
-                        <h3>Low-level software and control systems</h3>
-                        <p>
-                            Microcontroller fundamentals, communication protocols, power electronics, control models,
-                            and hardware-software integration.
-                        </p>
-                        <div class="chip-cloud">
-                            <span>C</span>
-                            <span>Embedded C</span>
-                            <span>UART</span>
-                            <span>I2C</span>
-                            <span>SPI</span>
-                            <span>CAN</span>
-                            <span>ADC</span>
-                            <span>PWM</span>
-                            <span>GPIO</span>
-                            <span>Flash</span>
-                            <span>MATLAB</span>
-                            <span>Simulink</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="section projects-section" id="projects">
-                <div class="section-heading" data-reveal>
-                    <p class="eyebrow">Selected projects</p>
-                    <h2>Software, automation, and embedded builds</h2>
-                </div>
-
-                <div class="project-grid">
-                    <article class="project-card featured-project" data-reveal>
-                        <div class="project-icon-panel" aria-label="GoFarm AI model icon">
-                            <div class="ai-orbit orbit-one"></div>
-                            <div class="ai-orbit orbit-two"></div>
-                            <div class="ai-icon-shell">
-                                <img src="assets/images/gofarm-ai-icon.png" alt="GoFarm logo icon">
-                            </div>
-                            <div class="ai-node node-top">RAG</div>
-                            <div class="ai-node node-right">LLM</div>
-                            <div class="ai-node node-bottom">API</div>
-                        </div>
-                        <div class="project-copy">
-                            <span class="project-type">AI agriculture platform</span>
-                            <h3>GoFarm</h3>
-                            <p>
-                                Built an AI-powered agriculture assistant with RAG-enabled crop recommendations,
-                                Node.js APIs, MongoDB storage, authentication, and role-based access.
-                            </p>
-                            <div class="tag-row">
-                                <span>Next.js</span>
-                                <span>Node.js</span>
-                                <span>MongoDB</span>
-                                <span>RAG</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-reveal>
-                        <span class="project-type">Control systems</span>
-                        <h3>Heat Exchanger Control System</h3>
-                        <p>
-                            Modeled transient thermal behavior and compared PI, PID, and Fuzzy Logic controllers in
-                            MATLAB/Simulink.
-                        </p>
-                        <div class="tag-row">
-                            <span>MATLAB</span>
-                            <span>Simulink</span>
-                            <span>Fuzzy Logic</span>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-reveal>
-                        <span class="project-type">Power electronics</span>
-                        <h3>Smart Hybrid Inverter</h3>
-                        <p>
-                            Designed an embedded control system integrating solar, battery, and grid sources with
-                            MPPT, ADC-based sensing, and automatic source switching.
-                        </p>
-                        <div class="tag-row">
-                            <span>Embedded C</span>
-                            <span>Arduino</span>
-                            <span>ESP8266</span>
-                            <span>MPPT</span>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-reveal>
-                        <span class="project-type">Low-level firmware</span>
-                        <h3>UART-Based Flash Bootloader</h3>
-                        <p>
-                            Developed bootloader logic for firmware updates with UART transfer, flash erase/write
-                            routines, checksum validation, and safe application handoff.
-                        </p>
-                        <div class="tag-row">
-                            <span>Embedded C</span>
-                            <span>UART</span>
-                            <span>Flash Memory</span>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="github-projects" data-reveal>
-                    <div class="github-heading">
-                        <div>
-                            <p class="eyebrow">From GitHub</p>
-                            <h3>Latest public repositories</h3>
-                        </div>
-                        <a class="github-profile-link" href="https://github.com/Jayasankar-R" target="_blank" rel="noreferrer">
-                            View GitHub
-                        </a>
-                    </div>
-                    <div class="github-status" id="github-status">Loading GitHub projects...</div>
-                    <div class="github-grid" id="github-projects" aria-live="polite"></div>
-                </div>
-            </section>
-
-            <section class="section education-section" data-reveal>
-                <div class="section-heading">
-                    <p class="eyebrow">Education</p>
-                    <h2>Electrical and electronics foundation</h2>
-                </div>
-                <div class="education-card">
-                    <div>
-                        <h3>Govt. Model Engineering College</h3>
-                        <p>Bachelor of Technology in Electrical and Electronics Engineering</p>
-                    </div>
-                    <span>Aug 2019 - Jun 2023</span>
-                </div>
-            </section>
-
-            <section class="section contact-section" id="contact">
-                <div class="contact-panel" data-reveal>
-                    <div>
-                        <p class="eyebrow">Contact</p>
-                        <h2>Let us build something clean, reliable, and useful.</h2>
-                    </div>
-                    <div class="contact-links">
-                        <a href="mailto:jayasankarr.mec@gmail.com">
-                            <span>Email</span>
-                            <strong>jayasankarr.mec@gmail.com</strong>
-                        </a>
-                        <a href="tel:+918157909781">
-                            <span>Phone</span>
-                            <strong>+91 8157909781</strong>
-                        </a>
-                        <a href="https://linkedin.com/in/jayasankar-r-078a65210" target="_blank" rel="noreferrer">
-                            <span>LinkedIn</span>
-                            <strong>linkedin.com/in/jayasankar-r-078a65210</strong>
-                        </a>
-                        <a href="https://github.com/Jayasankar-R" target="_blank" rel="noreferrer">
-                            <span>GitHub</span>
-                            <strong>github.com/Jayasankar-R</strong>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="site-footer">
-            <span>&copy; <span id="current-year"></span> Jayasankar R</span>
-            <a href="#home">Back to top</a>
-        </footer>
+    <div class="menu" id="menu" data-menu hidden>
+        <nav class="menu-links" aria-label="Menu">
+            <a href="#work" style="--i: 0"><span>Work</span></a>
+            <a href="#skills" style="--i: 1"><span>Skills</span></a>
+            <a href="#projects" style="--i: 2"><span>Projects</span></a>
+            <a href="#contact" style="--i: 3"><span>Contact</span></a>
+        </nav>
+        <div class="menu-foot">
+            <a href="mailto:jayasankarr.mec@gmail.com">jayasankarr.mec@gmail.com</a>
+            <a href="https://github.com/Jayasankar-R" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/jayasankar-r-078a65210" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
     </div>
 
-    <script src="script.js?v=20260602github2"></script>
+    <main id="main" tabindex="-1">
+        <section class="hero" id="home" aria-labelledby="hero-title" tabindex="-1">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="hero-kicker" data-intro><strong>Jayasankar R</strong> <span>Software and embedded systems engineer</span></p>
+                    <h1 class="hero-title" id="hero-title" data-intro-title>Scalable software with hardware-aware discipline.</h1>
+                    <p class="hero-lede" data-intro>2+ years across Java, TypeScript, React, cloud-native delivery, and embedded systems.</p>
+                    <div class="hero-actions" data-intro>
+                        <a class="btn btn-primary" href="assets/resumes/Jayasankar_R_Software_Resume.pdf" download data-magnetic>
+                            <span>Software resume</span>
+                            <span class="btn-well"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
+                        </a>
+                        <a class="btn btn-ghost" href="assets/resumes/Jayasankar_R_Embedded_Resume.pdf" download data-magnetic>
+                            <span>Embedded resume</span>
+                            <span class="btn-well"><svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="stage hero-stage" data-stage="hero" aria-hidden="true">
+                    <div class="stack-fallback">
+                        <div class="sf-scene">
+                            <span class="sf-plate" style="--i: 0"></span>
+                            <span class="sf-plate" style="--i: 1"></span>
+                            <span class="sf-plate" style="--i: 2"></span>
+                            <span class="sf-plate" style="--i: 3"></span>
+                            <span class="sf-plate" style="--i: 4"></span>
+                            <span class="sf-plate" style="--i: 5"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile" id="profile" aria-label="Profile">
+            <div class="container">
+                <p class="statement" data-words>
+                    I work where product problems meet system design: backend APIs, ERP workflows, observability,
+                    deployment automation, and low-level embedded concepts like GPIO, UART, ADC, PWM, flash memory,
+                    and bootloaders.
+                </p>
+
+                <dl class="stats">
+                    <div class="stat">
+                        <dt>Software engineering experience</dt>
+                        <dd><span data-count="2">2</span>+ yrs</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Features shipped in Agile teams</dt>
+                        <dd><span data-count="15">15</span>+</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>PostgreSQL response-time gain</dt>
+                        <dd>150-200 ms</dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Manual deployment intervention</dt>
+                        <dd>Near-zero</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="work" id="work" aria-labelledby="work-title" tabindex="-1">
+            <div class="container">
+                <header class="section-head">
+                    <h2 class="section-title" id="work-title" data-title>Recent engineering work</h2>
+                    <p class="section-sub">Three tracks over three years: product delivery, platform automation, and enterprise backend systems.</p>
+                </header>
+
+                <ol class="roles" role="list">
+                    <li class="role" data-role>
+                        <article class="role-card">
+                            <div class="role-core">
+                                <header class="role-head">
+                                    <p class="role-dates"><time datetime="2025-08">Aug 2025</time> - <time datetime="2026-02">Feb 2026</time></p>
+                                    <h3 class="role-title">Full-Stack Engineer</h3>
+                                    <p class="role-org">Onfuturesites</p>
+                                </header>
+                                <div class="role-body">
+                                    <p>Built scalable backend APIs with Node.js and Fastify, shipped user-facing features with Next.js and React Native, and designed PostgreSQL schemas for large datasets.</p>
+                                    <ul class="role-points" role="list">
+                                        <li>Reduced API latency by 30 percent through query and service-level optimization.</li>
+                                        <li>Improved data consistency across schemas handling 100k+ records.</li>
+                                    </ul>
+                                    <ul class="tags" role="list" aria-label="Stack">
+                                        <li>Node.js</li><li>Fastify</li><li>Next.js</li><li>PostgreSQL</li><li>Prisma</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li class="role" data-role>
+                        <article class="role-card">
+                            <div class="role-core">
+                                <header class="role-head">
+                                    <p class="role-dates"><time datetime="2025-06">Jun 2025</time> - <time datetime="2025-10">Oct 2025</time></p>
+                                    <h3 class="role-title">DevOps Engineer</h3>
+                                    <p class="role-org">Freelance</p>
+                                </header>
+                                <div class="role-body">
+                                    <p>Built CI/CD delivery workflows using GitHub Actions, ArgoCD, Kubernetes, and AWS EKS, with monitoring coverage across Prometheus, Grafana, Loki, and Fluent Bit.</p>
+                                    <ul class="role-points" role="list">
+                                        <li>Reduced deployment time by 60 percent with automated pipelines.</li>
+                                        <li>Improved system reliability with alerting and deployment visibility.</li>
+                                    </ul>
+                                    <ul class="tags" role="list" aria-label="Stack">
+                                        <li>ArgoCD</li><li>EKS</li><li>Docker</li><li>Helm</li><li>Grafana</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+
+                    <li class="role" data-role>
+                        <article class="role-card">
+                            <div class="role-core">
+                                <header class="role-head">
+                                    <p class="role-dates"><time datetime="2023-08">Aug 2023</time> - <time datetime="2025-04">Apr 2025</time></p>
+                                    <h3 class="role-title">Full-Stack Engineer</h3>
+                                    <p class="role-org">Captain Fresh</p>
+                                </header>
+                                <div class="role-body">
+                                    <p>Engineered backend services and REST APIs for ERP stock-transfer workflows, enterprise integrations, and high-frequency operational transactions.</p>
+                                    <ul class="role-points" role="list">
+                                        <li>Improved operational throughput by 15 percent for stock-transfer workflows.</li>
+                                        <li>Built Spring Boot microservices and Kafka-backed asynchronous integrations.</li>
+                                    </ul>
+                                    <ul class="tags" role="list" aria-label="Stack">
+                                        <li>TypeScript</li><li>React</li><li>Spring Boot</li><li>PostgreSQL</li><li>AWS</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="skills" id="skills" aria-labelledby="skills-title" tabindex="-1">
+            <div class="skills-pin" data-skills-pin>
+                <div class="container skills-grid">
+                    <header class="skills-head">
+                        <h2 class="section-title" id="skills-title" data-title>From pixels to pins</h2>
+                        <p class="section-sub">Two tracks, one engineering base: product software on top, firmware and hardware underneath.</p>
+                    </header>
+
+                    <div class="stage skills-stage" data-stage="skills" aria-hidden="true">
+                        <div class="stack-fallback is-exploded">
+                            <div class="sf-scene">
+                                <span class="sf-plate" style="--i: 0"></span>
+                                <span class="sf-plate" style="--i: 1"></span>
+                                <span class="sf-plate" style="--i: 2"></span>
+                                <span class="sf-plate" style="--i: 3"></span>
+                                <span class="sf-plate" style="--i: 4"></span>
+                                <span class="sf-plate" style="--i: 5"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skills-layers" data-layers>
+                        <div class="layer-group">
+                            <h3 class="layer-track">Software systems</h3>
+                            <ol class="layers" role="list">
+                                <li class="layer" data-layer="0">
+                                    <h4 class="layer-name">Interface</h4>
+                                    <p class="layer-tools">React, Next.js, React Native, TypeScript</p>
+                                </li>
+                                <li class="layer" data-layer="1">
+                                    <h4 class="layer-name">Services</h4>
+                                    <p class="layer-tools">Java, Spring Boot, Node.js, Fastify, Kafka</p>
+                                </li>
+                                <li class="layer" data-layer="2">
+                                    <h4 class="layer-name">Data</h4>
+                                    <p class="layer-tools">PostgreSQL, MongoDB, Prisma</p>
+                                </li>
+                                <li class="layer" data-layer="3">
+                                    <h4 class="layer-name">Platform</h4>
+                                    <p class="layer-tools">AWS, Docker, Kubernetes, ArgoCD, Helm, Grafana</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="layer-group">
+                            <h3 class="layer-track">Embedded systems</h3>
+                            <ol class="layers" role="list">
+                                <li class="layer" data-layer="4">
+                                    <h4 class="layer-name">Firmware</h4>
+                                    <p class="layer-tools">C, Embedded C, UART, I2C, SPI, CAN, flash memory</p>
+                                </li>
+                                <li class="layer" data-layer="5">
+                                    <h4 class="layer-name">Hardware</h4>
+                                    <p class="layer-tools">GPIO, ADC, PWM, power electronics, MATLAB, Simulink</p>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects" aria-labelledby="projects-title" tabindex="-1">
+            <div class="projects-pin" data-projects-pin>
+                <header class="container projects-head">
+                    <h2 class="section-title" id="projects-title" data-title>Software, automation, and embedded builds</h2>
+                    <div class="projects-progress" aria-hidden="true"><span></span></div>
+                </header>
+
+                <div class="projects-viewport">
+                    <ol class="projects-track" role="list" data-projects-track>
+                        <li class="project">
+                            <article class="project-card" data-spotlight>
+                                <div class="project-core">
+                                    <div class="project-visual">
+                                        <div class="viz viz-orbit" role="img" aria-label="Diagram of GoFarm connecting retrieval, a language model, and its APIs">
+                                            <span class="orbit-ring orbit-ring-outer"></span>
+                                            <span class="orbit-ring orbit-ring-inner"></span>
+                                            <span class="orbit-node" style="--a: -90deg">RAG</span>
+                                            <span class="orbit-node" style="--a: 30deg">LLM</span>
+                                            <span class="orbit-node" style="--a: 150deg">API</span>
+                                            <img class="orbit-core" src="assets/images/gofarm-ai-icon.png" alt="" width="428" height="424" loading="lazy" decoding="async">
+                                        </div>
+                                    </div>
+                                    <div class="project-copy">
+                                        <h3 class="project-title">GoFarm</h3>
+                                        <p class="project-kind">AI agriculture platform</p>
+                                        <p class="project-desc">An AI-powered agriculture assistant with RAG-enabled crop recommendations, Node.js APIs, MongoDB storage, authentication, and role-based access.</p>
+                                        <ul class="tags" role="list" aria-label="Stack">
+                                            <li>Next.js</li><li>Node.js</li><li>MongoDB</li><li>RAG</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+
+                        <li class="project">
+                            <article class="project-card" data-spotlight>
+                                <div class="project-core">
+                                    <div class="project-visual">
+                                        <figure class="viz viz-chart" data-viz="chart">
+                                            <svg class="chart" viewBox="0 0 480 270" role="img" aria-label="Illustrative step responses of PI, PID, and fuzzy logic controllers settling to a temperature setpoint">
+                                                <defs>
+                                                    <clipPath id="chart-sweep-clip">
+                                                        <rect class="chart-sweep" x="40" y="0" width="428" height="240"></rect>
+                                                    </clipPath>
+                                                </defs>
+                                                <line class="chart-axis" x1="40" y1="226" x2="464" y2="226"></line>
+                                                <line class="chart-axis" x1="40" y1="24" x2="40" y2="226"></line>
+                                                <line class="chart-setpoint" x1="40" y1="86" x2="464" y2="86"></line>
+                                                <text class="chart-text" x="464" y="78" text-anchor="end">setpoint</text>
+                                                <text class="chart-text" x="464" y="248" text-anchor="end">time</text>
+                                                <text class="chart-text" x="48" y="18">temperature</text>
+                                                <g clip-path="url(#chart-sweep-clip)">
+                                                    <path class="chart-line line-pi" d="M40.0 226.0L42.3 226.0L44.5 226.0L46.8 226.0L49.0 226.0L51.3 226.0L53.6 226.0L55.8 223.3L58.1 216.8L60.4 210.1L62.6 203.1L64.9 196.1L67.1 188.8L69.4 181.4L71.7 173.9L73.9 166.5L76.2 159.3L78.4 152.2L80.7 145.4L83.0 138.8L85.2 132.5L87.5 126.4L89.7 120.6L92.0 115.0L94.3 109.8L96.5 104.8L98.8 100.1L101.1 95.7L103.3 91.6L105.6 87.8L107.8 84.2L110.1 80.8L112.4 77.8L114.6 75.1L116.9 72.6L119.1 70.4L121.4 68.4L123.7 66.6L125.9 65.1L128.2 63.7L130.5 62.5L132.7 61.5L135.0 60.7L137.2 60.0L139.5 59.4L141.8 59.0L144.0 58.7L146.3 58.6L148.5 58.5L150.8 58.6L153.1 58.8L155.3 59.0L157.6 59.3L159.9 59.7L162.1 60.2L164.4 60.7L166.6 61.3L168.9 61.9L171.2 62.6L173.4 63.3L175.7 64.1L177.9 64.8L180.2 65.6L182.5 66.4L184.7 67.2L187.0 68.1L189.2 68.9L191.5 69.8L193.8 70.6L196.0 71.4L198.3 72.3L200.6 73.1L202.8 73.9L205.1 74.7L207.3 75.5L209.6 76.2L211.9 77.0L214.1 77.7L216.4 78.4L218.6 79.1L220.9 79.7L223.2 80.4L225.4 81.0L227.7 81.6L230.0 82.1L232.2 82.6L234.5 83.2L236.7 83.6L239.0 84.1L241.3 84.5L243.5 84.9L245.8 85.3L248.0 85.6L250.3 86.0L252.6 86.3L254.8 86.6L257.1 86.8L259.3 87.1L261.6 87.3L263.9 87.5L266.1 87.7L268.4 87.8L270.7 88.0L272.9 88.1L275.2 88.2L277.4 88.3L279.7 88.4L282.0 88.4L284.2 88.5L286.5 88.5L288.7 88.5L291.0 88.5L293.3 88.6L295.5 88.5L297.8 88.5L300.1 88.5L302.3 88.5L304.6 88.4L306.8 88.4L309.1 88.3L311.4 88.3L313.6 88.2L315.9 88.2L318.1 88.1L320.4 88.0L322.7 88.0L324.9 87.9L327.2 87.8L329.5 87.7L331.7 87.7L334.0 87.6L336.2 87.5L338.5 87.4L340.8 87.4L343.0 87.3L345.3 87.2L347.5 87.1L349.8 87.0L352.1 87.0L354.3 86.9L356.6 86.8L358.8 86.8L361.1 86.7L363.4 86.6L365.6 86.6L367.9 86.5L370.2 86.5L372.4 86.4L374.7 86.4L376.9 86.3L379.2 86.3L381.5 86.2L383.7 86.2L386.0 86.1L388.2 86.1L390.5 86.1L392.8 86.0L395.0 86.0L397.3 86.0L399.6 85.9L401.8 85.9L404.1 85.9L406.3 85.9L408.6 85.9L410.9 85.8L413.1 85.8L415.4 85.8L417.6 85.8L419.9 85.8L422.2 85.8L424.4 85.8L426.7 85.8L428.9 85.8L431.2 85.8L433.5 85.8L435.7 85.8L438.0 85.8L440.3 85.8L442.5 85.8L444.8 85.8L447.0 85.8L449.3 85.8L451.6 85.8L453.8 85.8L456.1 85.8L458.3 85.8L460.6 85.8L462.9 85.8"></path>
+                                                    <path class="chart-line line-fuzzy" d="M40.0 226.0L42.3 226.0L44.5 226.0L46.8 226.0L49.0 226.0L51.3 226.0L53.6 226.0L55.8 221.4L58.1 210.4L60.4 199.8L62.6 189.4L64.9 179.3L67.1 169.5L69.4 159.9L71.7 150.6L73.9 141.6L76.2 134.1L78.4 128.3L80.7 124.0L83.0 121.2L85.2 119.5L87.5 118.9L89.7 119.2L92.0 120.0L94.3 121.2L96.5 122.4L98.8 123.4L101.1 124.2L103.3 124.8L105.6 125.2L107.8 125.2L110.1 125.1L112.4 124.7L114.6 124.1L116.9 123.4L119.1 122.5L121.4 121.5L123.7 120.3L125.9 119.1L128.2 117.9L130.5 116.6L132.7 115.2L135.0 113.8L137.2 112.4L139.5 110.9L141.8 109.5L144.0 108.1L146.3 106.6L148.5 105.2L150.8 103.8L153.1 102.4L155.3 101.1L157.6 99.7L159.9 98.4L162.1 97.1L164.4 95.9L166.6 94.6L168.9 93.5L171.2 92.3L173.4 91.2L175.7 90.1L177.9 89.1L180.2 88.1L182.5 87.1L184.7 86.2L187.0 85.3L189.2 84.4L191.5 83.6L193.8 82.8L196.0 82.1L198.3 81.4L200.6 80.8L202.8 80.2L205.1 79.6L207.3 79.1L209.6 78.7L211.9 78.2L214.1 77.9L216.4 77.5L218.6 77.2L220.9 77.0L223.2 76.8L225.4 76.6L227.7 76.5L230.0 76.5L232.2 76.4L234.5 76.5L236.7 76.5L239.0 76.6L241.3 76.7L243.5 76.9L245.8 77.1L248.0 77.3L250.3 77.5L252.6 77.8L254.8 78.0L257.1 78.3L259.3 78.6L261.6 79.0L263.9 79.3L266.1 79.7L268.4 80.0L270.7 80.4L272.9 80.8L275.2 81.2L277.4 81.5L279.7 81.9L282.0 82.3L284.2 82.7L286.5 83.1L288.7 83.4L291.0 83.8L293.3 84.2L295.5 84.5L297.8 84.9L300.1 85.2L302.3 85.5L304.6 85.8L306.8 86.1L309.1 86.4L311.4 86.7L313.6 87.0L315.9 87.2L318.1 87.5L320.4 87.7L322.7 87.9L324.9 88.1L327.2 88.3L329.5 88.5L331.7 88.6L334.0 88.7L336.2 88.9L338.5 89.0L340.8 89.1L343.0 89.1L345.3 89.2L347.5 89.2L349.8 89.3L352.1 89.3L354.3 89.3L356.6 89.3L358.8 89.3L361.1 89.2L363.4 89.2L365.6 89.1L367.9 89.1L370.2 89.0L372.4 88.9L374.7 88.8L376.9 88.7L379.2 88.6L381.5 88.5L383.7 88.4L386.0 88.3L388.2 88.2L390.5 88.0L392.8 87.9L395.0 87.8L397.3 87.7L399.6 87.5L401.8 87.4L404.1 87.2L406.3 87.1L408.6 87.0L410.9 86.8L413.1 86.7L415.4 86.6L417.6 86.5L419.9 86.3L422.2 86.2L424.4 86.1L426.7 86.0L428.9 85.9L431.2 85.8L433.5 85.7L435.7 85.6L438.0 85.5L440.3 85.4L442.5 85.3L444.8 85.2L447.0 85.2L449.3 85.1L451.6 85.1L453.8 85.0L456.1 85.0L458.3 84.9L460.6 84.9L462.9 84.9"></path>
+                                                    <path class="chart-line line-pid" d="M40.0 226.0L42.3 226.0L44.5 226.0L46.8 226.0L49.0 226.0L51.3 226.0L53.6 226.0L55.8 221.4L58.1 210.4L60.4 199.8L62.6 189.4L64.9 179.3L67.1 169.5L69.4 159.9L71.7 151.0L73.9 144.1L76.2 137.8L78.4 132.2L80.7 127.3L83.0 123.0L85.2 119.3L87.5 115.9L89.7 112.6L92.0 109.4L94.3 106.5L96.5 103.7L98.8 101.0L101.1 98.5L103.3 96.0L105.6 93.9L107.8 91.9L110.1 90.1L112.4 88.5L114.6 87.1L116.9 85.8L119.1 84.7L121.4 83.7L123.7 82.8L125.9 82.0L128.2 81.2L130.5 80.6L132.7 80.0L135.0 79.5L137.2 79.0L139.5 78.6L141.8 78.2L144.0 77.9L146.3 77.7L148.5 77.5L150.8 77.3L153.1 77.2L155.3 77.1L157.6 77.0L159.9 76.9L162.1 76.9L164.4 76.9L166.6 77.0L168.9 77.0L171.2 77.1L173.4 77.1L175.7 77.2L177.9 77.3L180.2 77.4L182.5 77.5L184.7 77.7L187.0 77.8L189.2 77.9L191.5 78.1L193.8 78.2L196.0 78.4L198.3 78.5L200.6 78.7L202.8 78.8L205.1 79.0L207.3 79.2L209.6 79.3L211.9 79.5L214.1 79.6L216.4 79.8L218.6 80.0L220.9 80.1L223.2 80.3L225.4 80.4L227.7 80.6L230.0 80.7L232.2 80.9L234.5 81.0L236.7 81.2L239.0 81.3L241.3 81.4L243.5 81.6L245.8 81.7L248.0 81.8L250.3 82.0L252.6 82.1L254.8 82.2L257.1 82.3L259.3 82.4L261.6 82.6L263.9 82.7L266.1 82.8L268.4 82.9L270.7 83.0L272.9 83.1L275.2 83.2L277.4 83.3L279.7 83.4L282.0 83.4L284.2 83.5L286.5 83.6L288.7 83.7L291.0 83.8L293.3 83.8L295.5 83.9L297.8 84.0L300.1 84.1L302.3 84.1L304.6 84.2L306.8 84.3L309.1 84.3L311.4 84.4L313.6 84.4L315.9 84.5L318.1 84.5L320.4 84.6L322.7 84.6L324.9 84.7L327.2 84.7L329.5 84.8L331.7 84.8L334.0 84.9L336.2 84.9L338.5 84.9L340.8 85.0L343.0 85.0L345.3 85.1L347.5 85.1L349.8 85.1L352.1 85.2L354.3 85.2L356.6 85.2L358.8 85.2L361.1 85.3L363.4 85.3L365.6 85.3L367.9 85.3L370.2 85.4L372.4 85.4L374.7 85.4L376.9 85.4L379.2 85.5L381.5 85.5L383.7 85.5L386.0 85.5L388.2 85.5L390.5 85.6L392.8 85.6L395.0 85.6L397.3 85.6L399.6 85.6L401.8 85.6L404.1 85.6L406.3 85.7L408.6 85.7L410.9 85.7L413.1 85.7L415.4 85.7L417.6 85.7L419.9 85.7L422.2 85.7L424.4 85.7L426.7 85.8L428.9 85.8L431.2 85.8L433.5 85.8L435.7 85.8L438.0 85.8L440.3 85.8L442.5 85.8L444.8 85.8L447.0 85.8L449.3 85.8L451.6 85.8L453.8 85.8L456.1 85.9L458.3 85.9L460.6 85.9L462.9 85.9"></path>
+                                                </g>
+                                                <line class="chart-cursor" x1="40" y1="24" x2="40" y2="226"></line>
+                                            </svg>
+                                            <figcaption class="chart-legend">
+                                                <span class="key key-pid">PID</span>
+                                                <span class="key key-pi">PI</span>
+                                                <span class="key key-fuzzy">Fuzzy logic</span>
+                                                <span class="chart-note">Illustrative model</span>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                    <div class="project-copy">
+                                        <h3 class="project-title">Heat Exchanger Control System</h3>
+                                        <p class="project-kind">Control systems</p>
+                                        <p class="project-desc">Modeled transient thermal behavior and compared PI, PID, and Fuzzy Logic controllers in MATLAB/Simulink.</p>
+                                        <ul class="tags" role="list" aria-label="Stack">
+                                            <li>MATLAB</li><li>Simulink</li><li>Fuzzy Logic</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+
+                        <li class="project">
+                            <article class="project-card" data-spotlight>
+                                <div class="project-core">
+                                    <div class="project-visual">
+                                        <div class="viz viz-power" data-viz="power" data-source="solar">
+                                            <svg class="power" viewBox="0 0 480 270" role="img" aria-label="Illustrative power flow: the controller switches the load between solar, battery, and grid">
+                                                <path id="wire-solar" class="wire wire-solar" d="M124 66 C 176 66, 178 135, 226 135"></path>
+                                                <path id="wire-battery" class="wire wire-battery" d="M124 135 L 226 135"></path>
+                                                <path id="wire-grid" class="wire wire-grid" d="M124 204 C 176 204, 178 135, 226 135"></path>
+                                                <path id="wire-load" class="wire wire-load" d="M318 135 L 382 135"></path>
+
+                                                <g class="power-node node-solar"><rect x="28" y="44" width="96" height="44" rx="14"></rect><text x="76" y="71">Solar</text></g>
+                                                <g class="power-node node-battery"><rect x="28" y="113" width="96" height="44" rx="14"></rect><text x="76" y="140">Battery</text></g>
+                                                <g class="power-node node-grid"><rect x="28" y="182" width="96" height="44" rx="14"></rect><text x="76" y="209">Grid</text></g>
+                                                <g class="power-node node-mcu"><rect x="226" y="103" width="92" height="64" rx="16"></rect><text x="272" y="131">MCU</text><text class="node-sub" x="272" y="151">MPPT</text></g>
+                                                <g class="power-node node-load"><rect x="382" y="113" width="72" height="44" rx="14"></rect><text x="418" y="140">Load</text></g>
+
+                                                <g class="pulses pulses-solar">
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="0s"><mpath href="#wire-solar"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="-0.5s"><mpath href="#wire-solar"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="-1s"><mpath href="#wire-solar"></mpath></animateMotion></circle>
+                                                </g>
+                                                <g class="pulses pulses-battery">
+                                                    <circle r="3.4"><animateMotion dur="1.2s" repeatCount="indefinite" begin="0s"><mpath href="#wire-battery"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="1.2s" repeatCount="indefinite" begin="-0.6s"><mpath href="#wire-battery"></mpath></animateMotion></circle>
+                                                </g>
+                                                <g class="pulses pulses-grid">
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="0s"><mpath href="#wire-grid"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="-0.5s"><mpath href="#wire-grid"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="1.5s" repeatCount="indefinite" begin="-1s"><mpath href="#wire-grid"></mpath></animateMotion></circle>
+                                                </g>
+                                                <g class="pulses pulses-load">
+                                                    <circle r="3.4"><animateMotion dur="0.9s" repeatCount="indefinite" begin="0s"><mpath href="#wire-load"></mpath></animateMotion></circle>
+                                                    <circle r="3.4"><animateMotion dur="0.9s" repeatCount="indefinite" begin="-0.45s"><mpath href="#wire-load"></mpath></animateMotion></circle>
+                                                </g>
+                                            </svg>
+                                            <p class="viz-status" data-power-label>Running on solar</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-copy">
+                                        <h3 class="project-title">Smart Hybrid Inverter</h3>
+                                        <p class="project-kind">Power electronics</p>
+                                        <p class="project-desc">Embedded control system integrating solar, battery, and grid sources with MPPT, ADC-based sensing, and automatic source switching.</p>
+                                        <ul class="tags" role="list" aria-label="Stack">
+                                            <li>Embedded C</li><li>Arduino</li><li>ESP8266</li><li>MPPT</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+
+                        <li class="project">
+                            <article class="project-card" data-spotlight>
+                                <div class="project-core">
+                                    <div class="project-visual">
+                                        <div class="viz viz-flash" data-viz="flash" data-phase="receive" role="img" aria-label="Illustrative bootloader cycle: receive an image over UART, erase application pages, write them, verify the checksum, and jump to the application">
+                                            <div class="flash-link">
+                                                <span class="flash-port">UART</span>
+                                                <span class="flash-wire"><span class="flash-bits"></span></span>
+                                                <span class="flash-port">MCU</span>
+                                            </div>
+                                            <div class="flash-map">
+                                                <div class="flash-boot">Bootloader</div>
+                                                <div class="flash-pages">
+                                                    <span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span>
+                                                    <span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span>
+                                                    <span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span>
+                                                    <span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span><span class="flash-page"></span>
+                                                </div>
+                                            </div>
+                                            <ol class="flash-steps">
+                                                <li data-step="receive">Receive</li>
+                                                <li data-step="erase">Erase</li>
+                                                <li data-step="write">Write</li>
+                                                <li data-step="verify">Verify</li>
+                                                <li data-step="jump">Jump</li>
+                                            </ol>
+                                            <p class="viz-status" data-flash-status>Receiving image over UART</p>
+                                        </div>
+                                    </div>
+                                    <div class="project-copy">
+                                        <h3 class="project-title">UART-Based Flash Bootloader</h3>
+                                        <p class="project-kind">Low-level firmware</p>
+                                        <p class="project-desc">Bootloader logic for firmware updates with UART transfer, flash erase and write routines, checksum validation, and safe application handoff.</p>
+                                        <ul class="tags" role="list" aria-label="Stack">
+                                            <li>Embedded C</li><li>UART</li><li>Flash Memory</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="container github">
+                <header class="github-head">
+                    <div class="github-heading">
+                        <h3 class="github-title">Latest public repositories</h3>
+                        <p class="github-status" id="github-status" role="status">Loading repositories from GitHub.</p>
+                    </div>
+                    <a class="btn btn-ghost" href="https://github.com/Jayasankar-R" target="_blank" rel="noreferrer" data-icon="external" data-magnetic>
+                        <span>View GitHub</span>
+                        <span class="btn-well"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></span>
+                    </a>
+                </header>
+                <ul class="repos" id="github-projects" role="list" aria-busy="true" aria-describedby="github-status">
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                    <li class="repo repo-skeleton" aria-hidden="true"><span class="sk sk-title"></span><span class="sk sk-line"></span><span class="sk sk-meta"></span></li>
+                </ul>
+                <noscript>
+                    <style>.repos, .github-status { display: none; }</style>
+                    <p class="repo-message">The live repository list needs JavaScript. Every project is on the GitHub profile.</p>
+                </noscript>
+            </div>
+        </section>
+
+        <section class="contact" id="contact" aria-labelledby="contact-title" tabindex="-1">
+            <div class="container">
+                <h2 class="contact-title" id="contact-title" data-title>Let us build something clean, reliable, and useful.</h2>
+
+                <ul class="contact-list" role="list">
+                    <li>
+                        <a class="contact-row" href="mailto:jayasankarr.mec@gmail.com">
+                            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+                            <span class="contact-text"><span class="contact-label">Email</span><span class="contact-value">jayasankarr.mec@gmail.com</span></span>
+                            <span class="contact-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="tel:+918157909781">
+                            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+                            <span class="contact-text"><span class="contact-label">Phone</span><span class="contact-value">+91 8157909781</span></span>
+                            <span class="contact-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="https://linkedin.com/in/jayasankar-r-078a65210" target="_blank" rel="noreferrer">
+                            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg></span>
+                            <span class="contact-text"><span class="contact-label">LinkedIn</span><span class="contact-value">jayasankar-r-078a65210</span></span>
+                            <span class="contact-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="contact-row" href="https://github.com/Jayasankar-R" target="_blank" rel="noreferrer">
+                            <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg></span>
+                            <span class="contact-text"><span class="contact-label">GitHub</span><span class="contact-value">github.com/Jayasankar-R</span></span>
+                            <span class="contact-arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow-up-right"></use></svg></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="education">
+                    <h3 class="education-title">Education</h3>
+                    <p class="education-body">
+                        <strong>Govt. Model Engineering College</strong>
+                        <span>B.Tech, Electrical and Electronics Engineering</span>
+                        <span class="education-dates"><time datetime="2019-08">Aug 2019</time> - <time datetime="2023-06">Jun 2023</time></span>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>&copy; <span data-year>2026</span> Jayasankar R</p>
+            <a class="footer-top" href="#home">
+                <span>Back to top</span>
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+            </a>
+        </div>
+    </footer>
 </body>
 </html>
